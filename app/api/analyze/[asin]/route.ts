@@ -31,8 +31,8 @@ const getAmazonAnalysis = async (asin: string) => {
   }
 };
 
-export async function GET(req: NextRequest, { params }: { params: { asin: string } }) {
-  const { asin } = params;
+export async function GET(req: NextRequest) {
+  const asin = req.nextUrl.pathname.split("/").pop(); // Extract ASIN from the URL
 
   if (!asin) {
     return NextResponse.json({ error: "ASIN is required" }, { status: 400 });
