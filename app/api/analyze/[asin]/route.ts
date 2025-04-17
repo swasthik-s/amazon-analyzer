@@ -13,7 +13,8 @@ const getAmazonAnalysis = async (asin: string) => {
       messages: [
         {
           role: "system",
-          content: "You are Grok, a chatbot inspired by the Hitchhiker's Guide to the Galaxy. You analyze Amazon products and suggest improvements.",
+          content:
+            "You are Grok, a chatbot inspired by the Hitchhiker's Guide to the Galaxy. You analyze Amazon products and suggest improvements.",
         },
         {
           role: "user",
@@ -41,6 +42,7 @@ export async function GET(req: NextRequest, { params }: { params: { asin: string
     const analysis = await getAmazonAnalysis(asin);
     return NextResponse.json({ result: analysis });
   } catch (error) {
+    console.error("API route error:", error); // 🔥 this line avoids the ESLint warning
     return NextResponse.json({ error: "Error performing analysis" }, { status: 500 });
   }
 }
