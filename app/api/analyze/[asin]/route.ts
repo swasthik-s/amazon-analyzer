@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import { NextResponse, NextRequest } from "next/server";
 
 const client = new OpenAI({
-  apiKey: process.env.GROK_API_KEY!, // The `!` assumes you've defined it
+  apiKey: process.env.GROK_API_KEY!, // Ensure this is set in Vercel's environment variables
   baseURL: "https://api.x.ai/v1",
 });
 
@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
     const analysis = await getAmazonAnalysis(asin);
     return NextResponse.json({ result: analysis });
   } catch (error) {
-    console.error("API route error:", error); // 🔥 this line avoids the ESLint warning
+    console.error("API route error:", error);
     return NextResponse.json({ error: "Error performing analysis" }, { status: 500 });
   }
 }
