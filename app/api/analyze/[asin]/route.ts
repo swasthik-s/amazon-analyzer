@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import { NextResponse, NextRequest } from "next/server";
 
 const client = new OpenAI({
-  apiKey: process.env.XAI_API_KEY
+  apiKey: process.env.GROK_API_KEY!, // The `!` assumes you've defined it
   baseURL: "https://api.x.ai/v1",
 });
 
