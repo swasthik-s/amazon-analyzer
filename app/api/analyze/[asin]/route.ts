@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 // Initialize OpenAI client with your API key (Grok model)
 const client = new OpenAI({
@@ -42,9 +43,8 @@ const getAmazonAnalysis = async (asin: string) => {
 };
 
 // The GET method to handle the analysis request for a given ASIN
-export async function GET(req: Request, { params }: { params: { asin: string } }) {
-  // Await params to ensure the ASIN is extracted correctly
-  const { asin } = await params; 
+export async function GET(req: NextRequest, { params }: { params: { asin: string } }) {
+  const { asin } = params; 
 
   if (!asin) {
     return NextResponse.json({ error: 'ASIN is required' }, { status: 400 });
